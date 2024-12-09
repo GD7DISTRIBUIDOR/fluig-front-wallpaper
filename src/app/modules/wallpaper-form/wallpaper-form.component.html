@@ -1,0 +1,59 @@
+<!-- wallpaper-form.component.html -->
+<div *ngIf="showWgtWallpaper">
+
+    <div class="wwgt-header">
+        <div>
+            <h1>Papel de Parede</h1>
+        </div>
+        <hr style="margin-top: 0; width: 100%; border: 0; height: 3px; background: #35457e;"/>
+    </div>
+
+    <div style="padding: 10px; padding-top: 0px;">
+
+        <div class="upload-container">
+            <button pButton type="button" label="Enviar Imagem" style="color: #FFF;" icon="pi pi-upload" (click)="openDialog()"></button>
+        </div>
+
+        <p-toast />
+
+        <p-dialog 
+            header="Enviar Imagem" 
+            [(visible)]="displayDialog" 
+            (onHide)="closeDialog()"
+            [modal]="true" 
+            [maximizable]="false" 
+            [responsive]="true" 
+            [style]="{'width': '550px', 'height': 'auto', 'background-color': '#d9d9d9', 'border': '1px solid #35457e', 'box-shadow': '0 2px 5px #35457e'}" 
+            [contentStyle]="{'overflow': 'hidden'}"
+            [baseZIndex]="10000">
+                
+                <div class="card">
+                    <p-fileUpload 
+                    #fileInput
+                    name="file" 
+                    customUpload="true" 
+                    accept=".jpeg,.jpg" 
+                    [style]="{'width': '100%'}"
+                    [auto]="false">
+                        <ng-template pTemplate="header"visible="false"></ng-template>
+                        <ng-template pTemplate="content" style="margin-bottom: 10px;"></ng-template>
+                        <ng-template 
+                        pTemplate="empty"
+                        let-chooseCallback="chooseCallback">
+                            <div class="custom-file-upload">
+                                <p>Arraste e solte a imagem aqui ou clique para escolher o arquivo</p>
+                                <button pButton type="button" style="color: #FFF;" label="Escolher Imagem" (click)="fileInputi.click()"></button>
+                                <input #fileInputi type="file" style="display:none" (change)="onFileChange($event)" />                    
+                            </div>
+                        </ng-template>
+                    </p-fileUpload>
+                
+                </div>
+
+                <button pButton type="button" style="color: #FFF;" label="Enviar" (click)="sendImage()"></button>
+        
+        </p-dialog>
+
+    </div>    
+
+</div>
